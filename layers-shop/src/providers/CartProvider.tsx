@@ -1,11 +1,20 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import type { CartLine, CartState, Product } from "@/types";
+import type { CartLine, CartState } from "@/types";
+
+type AddItemInput = {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  currency: string;
+  image: string;
+};
 
 interface CartContextValue {
   lines: CartLine[];
-  addItem: (product: Product, quantity?: number) => void;
+  addItem: (product: AddItemInput, quantity?: number) => void;
   removeItem: (slug: string) => void;
   updateQuantity: (slug: string, quantity: number) => void;
   clear: () => void;
@@ -46,7 +55,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     saveCartToStorage({ lines });
   }, [lines]);
 
-  const addItem = useCallback((product: Product, quantity: number = 1) => {
+  const addItem = useCallback((product: AddItemInput, quantity: number = 1) => {
     setLines(prev => {
       const existing = prev.find(l => l.slug === product.slug);
       if (existing) {

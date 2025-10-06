@@ -18,7 +18,14 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "src/generated/**",
+      "node_modules/@prisma/client/**",
     ],
+    rules: {
+      "@typescript-eslint/no-explicit-any": ["warn"],
+      "@typescript-eslint/no-require-imports": ["off"],
+      "import/no-commonjs": ["off"],
+    },
   },
 ];
 

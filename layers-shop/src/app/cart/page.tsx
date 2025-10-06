@@ -55,9 +55,35 @@ export default function CartPage() {
           <span>Subtotal</span>
           <span>{formattedSubtotal}</span>
         </div>
-        <button onClick={() => { clear(); alert("Order placed. This is a demo checkout."); }} className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-medium hover:bg-black/90">Checkout</button>
-        <p className="mt-2 text-xs text-black/60">Checkout is simulated for demo purposes.</p>
+        <CheckoutButton lines={lines} onSuccess={() => clear()} />
+        <p className="mt-2 text-xs text-black/60">A demo order will be created.</p>
       </aside>
     </div>
+  );
+}
+
+function CheckoutButton({ lines, onSuccess }: { lines: { slug: string; quantity: number; }[]; onSuccess: () => void }) {
+  return (
+    <button
+      onClick={async () => {
+        const body = {
+          email: "guest@example.com",
+          shippingName: "Guest",
+          shippingAddress1: "123 Main St",
+          shippingCity: "City",
+          shippingPostalCode: "00000",
+          shippingCountry: "US",
+          lines: lines.map(l => ({ slug: l.slug, quantity: l.quantity })),
+        };
+        const res = await fetch("/api/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        if (!res.ok) { alert("Checkout failed"); return; }
+        const json = await res.json();
+        onSuccess();
+        window.location.href = `/order/${json.id}`;
+      }}
+      className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-medium hover:bg-black/90"
+    >
+      Checkout
+    </button>
   );
 }

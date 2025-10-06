@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { CartBadge } from "./CartBadge";
+import { AuthButtons } from "./AuthButtons";
 
 export function Header() {
   return (
@@ -14,6 +15,8 @@ export function Header() {
           <Link href="/faq" className="hover:underline underline-offset-4">FAQ</Link>
         </nav>
         <div className="flex items-center gap-4">
+          <AuthButtons />
+          <Link href="/admin" className="text-sm hover:underline underline-offset-4 hidden md:inline">Admin</Link>
           <Link href="/cart" className="relative inline-flex items-center gap-2">
             <span>Cart</span>
             <CartBadge />

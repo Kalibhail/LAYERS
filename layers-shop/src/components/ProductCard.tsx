@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/types";
 
-export function ProductCard({ product }: { product: Product }) {
+type ProductPreview = {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  currency: string;
+  image: string;
+};
+
+export function ProductCard({ product }: { product: ProductPreview }) {
   const price = new Intl.NumberFormat("en-US", { style: "currency", currency: product.currency }).format(product.price / 100);
   return (
     <Link href={`/product/${product.slug}`} className="group block overflow-hidden rounded-xl border border-black/10 bg-white">

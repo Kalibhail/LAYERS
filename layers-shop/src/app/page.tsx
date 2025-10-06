@@ -1,9 +1,10 @@
 import { Hero } from "@/components/Hero";
-import { products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { getAllProducts } from "@/lib/products";
 
-export default function Home() {
-  const featured = products.filter(p => p.featured);
+export default async function Home() {
+  const all = await getAllProducts();
+  const featured = all.slice(0, 3);
   return (
     <div className="space-y-16 py-8">
       <Hero />
