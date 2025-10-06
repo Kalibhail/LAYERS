@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { getProductBySlug } from "@/lib/products";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
