@@ -4,10 +4,10 @@ generator client {
 
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("postgresql://neondb_owner:npg_wRMcH0yWTJ5g@ep-falling-frog-ad8ispdi-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
-  // uncomment next line if you use Prisma <5.10
-  // directUrl = env("postgresql://neondb_owner:npg_wRMcH0yWTJ5g@ep-falling-frog-ad8ispdi.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
+-  provider = "postgresql"
+-  url      = env("postgresql://neondb_owner:npg_wRMcH0yWTJ5g@ep-falling-frog-ad8ispdi-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require")
++  provider = "postgresql"
++  url      = env("DATABASE_URL")
 }
 
 enum Role {
